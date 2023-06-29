@@ -8,7 +8,6 @@ const Signup = () => {
 
   const {register, handleSubmit, reset} = useForm()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const submit = (dataRegisterUser) => {
     dispatch(registerUser(dataRegisterUser))
@@ -51,7 +50,7 @@ const Signup = () => {
         </button>
 
         <p className="text-start py-3">
-          Already have an account? <Link to={"/login"} className="text-blue-600 underline hover:no-underline">Log in</Link> 
+          Already have an account? <Link to="/login" className="text-blue-600 underline hover:no-underline">Log in</Link> 
         </p>
       </form>
     </section>

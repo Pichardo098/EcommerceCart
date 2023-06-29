@@ -67,7 +67,7 @@ const Login = () => {
         </button>
 
         <p className="text-start py-3">
-          Don't have an account? <Link to={"/signup"} className="text-blue-600 underline hover:no-underline">Sing up</Link> 
+          Don't have an account? <Link to={"/signup"} className="text-blue-600 underline hover:no-underline">Sign up</Link> 
         </p>
       </form>
       }
