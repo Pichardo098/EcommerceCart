@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { changeIsShowCart, checkoutCart, getProductsCart } from "../../store/slices/cart.slice"
 import CartProduct from "./CartProduct"
-import { useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
+import ModalPurchaseCreate from "./ModalPurchaseCreate"
 
 
 const Cart = () => {
@@ -11,6 +12,7 @@ const Cart = () => {
   const {token} = useSelector((store)=> store.userInfo)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [showModalPurchase, setShowModalPurchase] = useState(false)
   
   
 
@@ -18,7 +20,7 @@ const Cart = () => {
     if(token && isShowCart ){
       dispatch(getProductsCart())
     }
-  },[isShowCart,token])
+  },[isShowCart])
 
 
   const handleClickCloseCart = () => {
@@ -29,12 +31,13 @@ const Cart = () => {
 
 
   const handleClickCheckout = () => {
+    setShowModalPurchase(!showModalPurchase)
     navigate("/purchases")
     dispatch(checkoutCart())
   }
   
   return (
-    <section className={`fixed  bottom-0 right-0 w-[300px] top-0 transition-all overflow-hidden ${isShowCart && token ? "translate-x-0" : "translate-x-full"}  shadow-lg shadow-gray-500`}>
+    <section className={`fixed  bottom-0 right-0 w-[300px] top-[48px] lg:top-0 transition-all overflow-hidden ${isShowCart && token ? "translate-x-0" : "translate-x-full"}  shadow-lg shadow-gray-500`}>
       <section className=" p-6 pt-[48px] absolute flex flex-col h-full w-full justify-between bg-white shadow-lg shadow-gray-300  ">
         <button onClick={handleClickCloseCart} className="absolute top-2 right-3 font-bold text-red-500 bg-gray-200 py-1 px-3 rounded-full hover:bg-gray-100 hover:text-red-400">
           X
@@ -63,6 +66,7 @@ const Cart = () => {
 
         </section>
       </section>
+      <ModalPurchaseCreate setShowModalPurchase={setShowModalPurchase} showModalPurchase={showModalPurchase} />
     </section>
   )
 }

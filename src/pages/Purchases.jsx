@@ -72,7 +72,7 @@ const Purchases = () => {
         setPurchasesHistory(orderPurchases)
       })
       .catch((err)=> console.log(err))
-  },[])
+  },[purchasesHistory])
 
   
   return (
@@ -111,6 +111,8 @@ const Purchases = () => {
         }
 
       </section>
+
+ 
     </section>
   )
 }

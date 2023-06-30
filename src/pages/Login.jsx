@@ -37,7 +37,7 @@ const Login = () => {
           </button>
         </section> 
         :
-      <form onSubmit={handleSubmit(submit)} className="p-5 mx-2 bg-white rounded-lg max-w-[350px] flex flex-col gap-6 mt-8">
+      <form onSubmit={handleSubmit(submit)} className="p-5 mx-2 bg-white rounded-lg max-w-[350px] flex flex-col gap-6 my-8">
         <h3 className="font-bold text-2xl mt-2">Welcome! Enter your email and password to continue</h3>
 
         <section className="bg-cyan-100 p-3 rounded-lg my-4">

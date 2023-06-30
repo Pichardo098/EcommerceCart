@@ -4,6 +4,7 @@ import { axiosEcommerce, getConfig } from "../utils/configureAxios"
 import ListProducts from "../components/home/ListProducts"
 import { useDispatch, useSelector } from "react-redux"
 import { addProductCart, getProductsCart, updateCart } from "../store/slices/cart.slice"
+import Load from "../components/layout/Load"
 
 const stylesImages = {
   0 :"-ml-[0%]",
@@ -123,6 +124,8 @@ const ProductDetail = () => {
         </section>
 
         {/* Contenedor del producto */}
+        {
+          product ? 
         <section className=" p-2 sm:p-5 mx-auto grid items-center  gap-6 sm:grid-cols-2 md:text-[20px]">
           
           {/* Contenedor Imagenes */}
@@ -182,6 +185,9 @@ const ProductDetail = () => {
             <p className="text-[15] text-black md:text-[18px] p-2">{product?.description}</p>
           </article>
         </section>
+          :
+        <Load/>
+        }
 
         {/* Productos Similares */}
         <section className="p-2 grid text-xl gap-6">

@@ -3,6 +3,7 @@ import { axiosEcommerce } from "../utils/configureAxios"
 import Product from "../components/home/Product"
 import ListProducts from "../components/home/ListProducts"
 import Filters from "../components/home/Filters"
+import Load from "../components/layout/Load"
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -79,7 +80,13 @@ const Home = () => {
       {/* Filtros */}
       <Filters handleClickCategory={handleClickCategory} categories={categories}  showToFilters={showToFilters}  setShowToFilters={setShowToFilters}  handleSubmitFilters={handleSubmitFilters}/>
       {/* Products */}
-      <ListProducts products={productsByName}/>
+      {
+        productsByName ? 
+        <ListProducts products={productsByName}/>
+        :
+        <Load/>
+      }
+      
       </section>
     </main>
   )

@@ -1,23 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { registerUser } from '../store/slices/userInfo.slice'
+import ModalErrorCreateUser from '../components/signup/ModalErrorCreateUser'
+import { loginUser } from '../store/slices/userInfo.slice'
+import { axiosEcommerce } from '../utils/configureAxios'
+import ModalSuccesCreateUser from '../components/signup/ModalSuccesCreateUser'
 
 const Signup = () => {
 
+  const [isShowModalErr , setIsShowModalErr] = useState(false)
+  const [isShowModalCreate , setIsShowModalCreate] = useState(false)
+
   const {register, handleSubmit, reset} = useForm()
+  const navigate = useNavigate()
+
   const dispatch = useDispatch()
 
   const submit = (dataRegisterUser) => {
-    dispatch(registerUser(dataRegisterUser))
+      axiosEcommerce.post("/users", dataRegisterUser)
+        .then(()=> {
+          const dataLogin = {
+            email: dataRegisterUser.email,
+            password: dataRegisterUser.password
+          }
+          dispatch(loginUser( dataLogin))
+          navigate("/login")
+          window.alert("Cuenta creada con éxito")
+        })
+        .catch((err)=> setIsShowModalErr(!isShowModalErr))
+    
   }
 
+
+  
   return (
     <section className="  bg-gray-200 text-black flex justify-center items-center ">
       <form onSubmit={handleSubmit(submit)} className="p-5 mx-2 bg-white rounded-lg w-[350px] flex flex-col gap-6 my-8">
         <h3 className="font-bold text-2xl mt-2">Sign Up</h3>
-
         {/* First Name */}
         <div className="grid gap-3">
           <label className="text-sm font-semibold" htmlFor="email">First Name:</label>
@@ -53,6 +73,9 @@ const Signup = () => {
           Already have an account? <Link to="/login" className="text-blue-600 underline hover:no-underline">Log in</Link> 
         </p>
       </form>
+
+      <ModalErrorCreateUser setIsShowModal={setIsShowModalErr} isShowModal={isShowModalErr} />
+      <ModalSuccesCreateUser isShowModalCreate={isShowModalCreate} setIsShowModalCreate={setIsShowModalCreate}/>
     </section>
   )
 }
