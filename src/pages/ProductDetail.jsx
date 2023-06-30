@@ -127,7 +127,7 @@ const ProductDetail = () => {
         {
           product ? 
         <section className=" p-2 sm:p-5 mx-auto grid items-center  gap-6 sm:grid-cols-2 md:text-[20px]">
-          
+         
           {/* Contenedor Imagenes */}
           <article className="overflow-hidden relative ">
             <section className={`flex  w-[300%] ${stylesImages[imageToShow]} transition-all `}>
@@ -159,7 +159,7 @@ const ProductDetail = () => {
             </section>
           </article>
 
-
+          
 
           {/* Contenedor Descripción */}
           <article className="flex flex-col gap-7">
@@ -186,8 +186,11 @@ const ProductDetail = () => {
           </article>
         </section>
           :
-        <Load/>
+          <section className=" absolute top-1/2 translate-x-1/2 left-1/2 ">
+            <Load/>
+          </section>
         }
+        
 
         {/* Productos Similares */}
         <section className="p-2 grid text-xl gap-6">

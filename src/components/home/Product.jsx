@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { axiosEcommerce, getConfig } from "../../utils/configureAxios"
 import { addProductCart, getProductsCart, updateCart } from "../../store/slices/cart.slice"
 import { useDispatch, useSelector } from "react-redux"
+import Load from "../layout/Load"
 
 const Product = ({product}) => {
   
@@ -38,12 +39,17 @@ const Product = ({product}) => {
   
 
   return (
+    
     <article  className="bg-white text-black flex flex-col justify-between items-center gap-2 rounded-lg border-2 border-gray-300 ">
+      {
+      product.images[0] ? 
       <Link to={`/products/${product.id}`} className="h-[200px] px-5 my-10 overflow-hidden relative group   ">
-        
         <img className="w-full h-full object-contain group-hover:opacity-0 transition-opacity duration-700 " src={product.images[0].url} alt={product.title} />
         <img className="absolute left-0 top-0 w-full h-full object-contain p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 " src={product.images[1].url} alt={product.title} />
       </Link>
+      :
+      <Load/>
+      }
       <hr className="h-[1px] border-none bg-gray-400 w-full" />
       <section className="flex flex-col  text-start w-full px-5 relative h-[220px]  justify-start gap-5 py-5 text-xl ">
         <section >

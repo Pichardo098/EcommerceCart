@@ -81,10 +81,12 @@ const Home = () => {
       <Filters handleClickCategory={handleClickCategory} categories={categories}  showToFilters={showToFilters}  setShowToFilters={setShowToFilters}  handleSubmitFilters={handleSubmitFilters}/>
       {/* Products */}
       {
-        productsByName ? 
+        products ? 
         <ListProducts products={productsByName}/>
         :
-        <Load/>
+        <section className=" absolute top-1/2 translate-x-1/2 left-1/2 bg-white">
+          <Load/>
+        </section>
       }
       
       </section>
